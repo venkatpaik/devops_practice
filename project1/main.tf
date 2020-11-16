@@ -157,7 +157,7 @@ resource "aws_instance" "web-server-instance" {
     ]
   } 
   provisioner "file" {
-    source = "project1"
+    source = "projfiles"
     destination = "/home/ubuntu/devops"
   }
   provisioner "remote-exec" {
