@@ -12,7 +12,7 @@ pipeline{
     stages{
         stage("git checkout"){
             steps{
-                git credentialsId: '8535c93d-f541-43dd-9e46-0b677efe7996', url: 'https://github.com/venkatpaik/devops_practice'
+                git url: 'https://github.com/venkatpaik/devops_practice'
             }
         }
         stage("terraform init"){
