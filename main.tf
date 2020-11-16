@@ -141,32 +141,42 @@ resource "aws_instance" "web-server-instance" {
     network_interface_id = aws_network_interface.web-server-nic.id
   }
 
-  provisioner "remote-exec" {
-    inline = [
-      "sudo apt-get update",
-      "sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common",
-      "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
-      "sudo add-apt-repository deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable",
-      "sudo apt-get update",
-      "sudo apt-get install docker-ce docker-ce-cli containerd.io",
-      "mkdir /home/ubuntu/devops"
-    #   "sudo groupadd docker",
-    #   "sudo usermod -aG docker $USER"
-    ]
-  } 
-  provisioner "file" {
-    source = "projfiles"
-    destination = "/home/ubuntu/devops"
-  }
-  provisioner "remote-exec" {
-    inline = [
-      "docker stop nodejs-demo",
-      "docker rm -f nodejs-demo",
-      "docker image rm -f nodejs-demo",
-      "docker build -t nodejs-demo .",
-      "docker run -d --name nodejs-demo -p 8090:3000 nodejs-demo"
-    ]
-  }
+  userdata = <<-EOF
+              #!/bin/bash
+              sudo apt-get update
+              sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+              curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+              sudo add-apt-repository deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable
+              sudo apt-get update
+              sudo apt-get install docker-ce docker-ce-cli containerd.io
+              EOF
+
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "sudo apt-get update",
+  #     "sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common",
+  #     "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
+  #     "sudo add-apt-repository deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable",
+  #     "sudo apt-get update",
+  #     "sudo apt-get install docker-ce docker-ce-cli containerd.io",
+  #     "mkdir /home/ubuntu/devops"
+  #   #   "sudo groupadd docker",
+  #   #   "sudo usermod -aG docker $USER"
+  #   ]
+  # } 
+  # provisioner "file" {
+  #   source = "projfiles"
+  #   destination = "/home/ubuntu/devops"
+  # }
+  # provisioner "remote-exec" {
+  #   inline = [
+  #     "docker stop nodejs-demo",
+  #     "docker rm -f nodejs-demo",
+  #     "docker image rm -f nodejs-demo",
+  #     "docker build -t nodejs-demo .",
+  #     "docker run -d --name nodejs-demo -p 8090:3000 nodejs-demo"
+  #   ]
+  # }
 
   tags = {
     Name = "web-server"
