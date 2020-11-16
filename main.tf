@@ -143,8 +143,7 @@ resource "aws_instance" "web-server-instance" {
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo apt update -y
-              sudo apt-get remove docker docker-engine docker.io
+              sudo apt update
               sudo apt install docker.io
               sudo systemctl start docker
               sudo systemctl enable docker
