@@ -141,7 +141,7 @@ resource "aws_instance" "web-server-instance" {
     network_interface_id = aws_network_interface.web-server-nic.id
   }
 
-  userdata = <<-EOF
+  user_data = <<-EOF
               #!/bin/bash
               sudo apt-get update
               sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common
