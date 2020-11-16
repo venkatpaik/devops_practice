@@ -12,7 +12,7 @@ pipeline{
     stages{
         stage("git checkout"){
             steps{
-                git branch='main', url: 'https://github.com/venkatpaik/devops_practice'
+                git branch: 'main', url: 'https://github.com/venkatpaik/devops_practice'
             }
         }
         stage("terraform init"){
