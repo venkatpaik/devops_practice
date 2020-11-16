@@ -144,9 +144,10 @@ resource "aws_instance" "web-server-instance" {
   user_data = <<-EOF
               #!/bin/bash
               sudo apt update -y
-              sudo apt install apache2 -y
-              sudo systemctl start apache2
-              sudo bash -c 'echo your very first web server > /var/www/html/index.html'
+              sudo apt-get remove docker docker-engine docker.io
+              sudo apt install docker.io
+              sudo systemctl start docker
+              sudo systemctl enable docker
               EOF
 
   # provisioner "remote-exec" {
