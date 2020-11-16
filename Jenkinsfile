@@ -13,7 +13,7 @@ pipeline{
         stage("git checkout"){
             steps{
                 script{
-                        git "https://github.com/easyawslearn/Terraform-Tutorial.git"
+                        git "https://github.com/venkatpaik/devops_practice.git"
                     }
             }
         }
