@@ -25,10 +25,10 @@ pipeline{
                 sh label: 'tapply', script: 'terraform apply --auto-approve'
             }
         }
-        stage("terraform destroy"){
-            steps{
-                sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
-            }
-        }
+        // stage("terraform destroy"){
+        //     steps{
+        //         sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
+        //     }
+        // }
     }
 }
