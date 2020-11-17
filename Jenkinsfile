@@ -28,7 +28,7 @@ pipeline{
         }
         stage("terraform apply"){
             steps{
-                sh 'export TF_VAR_credentials_file = ${DEV_ACCESS_KEY}'
+                sh 'echo ${DEV_ACCESS_KEY}'
                 sh label: 'tapply', script: 'terraform apply --auto-approve'
             }
         }
