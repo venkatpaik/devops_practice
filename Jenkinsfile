@@ -30,11 +30,11 @@ pipeline{
                 sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
             }
         }
-        // stage("terraform apply"){
-        //     steps{
-        //         sh 'echo ${DEV_ACCESS_KEY}'
-        //         sh label: 'tapply', script: 'terraform apply --auto-approve'
-        //     }
-        // }
+        stage("terraform apply"){
+            steps{
+                sh 'echo ${DEV_ACCESS_KEY}'
+                sh label: 'tapply', script: 'terraform apply --auto-approve'
+            }
+        }
     }
 }
