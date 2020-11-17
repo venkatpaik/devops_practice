@@ -128,7 +128,7 @@ output "server_public_ip" {
   value = aws_eip.one.public_ip
 }
 
-variable "credentials_file" {}
+variable "credentials_file" { }
 
 # # 9. Create ubuntu instance and install/enable docker
 
@@ -163,6 +163,7 @@ resource "aws_instance" "web-server-instance" {
   # } 
   connection {
     type = "ssh"
+    host = self.public_ip
     user = "ubuntu"
     private_key = var.credentials_file
   }
