@@ -128,6 +128,10 @@ output "server_public_ip" {
   value = aws_eip.one.public_ip
 }
 
+variable "credentials_file" {
+  default = TF_VAR_key
+}
+
 # # 9. Create ubuntu instance and install/enable docker
 
 resource "aws_instance" "web-server-instance" {
@@ -159,15 +163,15 @@ resource "aws_instance" "web-server-instance" {
   #     "sudo usermod -aG docker $USER"
   #   ]
   # } 
-  # connection {
-  #   type = "ssh"
-  #   user = "ubuntu"
-  #   private_file = 
-  # }
-  # provisioner "file" {
-  #   source = "projfiles"
-  #   destination = "/home/ubuntu"
-  # }
+  connection {
+    type = "ssh"
+    user = "ubuntu"
+    private_key = "${var.credentials_file}"
+  }
+  provisioner "file" {
+    source = "projfiles"
+    destination = "/home/ubuntu"
+  }
   # provisioner "remote-exec" {
   #   inline = [
   #     "docker stop nodejs-demo",

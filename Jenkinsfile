@@ -7,6 +7,7 @@ pipeline{
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
+        TF_VAR_key = credentials('DEV_ACCESS_KEY')
     }
     
     stages{
