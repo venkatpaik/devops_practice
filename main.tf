@@ -165,7 +165,7 @@ resource "aws_instance" "web-server-instance" {
     type = "ssh"
     host = self.public_ip
     user = "ubuntu"
-    private_key = "${DEV_ACCESS_KEY}"
+    private_key = DEV_ACCESS_KEY
   }
   provisioner "file" {
     source = "projfiles"
