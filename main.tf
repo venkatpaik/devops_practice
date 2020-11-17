@@ -161,16 +161,16 @@ resource "aws_instance" "web-server-instance" {
   #     "sudo usermod -aG docker $USER"
   #   ]
   # } 
-  connection {
-    type = "ssh"
-    host = self.public_ip
-    user = "ubuntu"
-    private_key = "${DEV_ACCESS_KEY}"
-  }
-  provisioner "file" {
-    source = "projfiles"
-    destination = "/home/ubuntu"
-  }
+  # connection {
+  #   type = "ssh"
+  #   host = self.public_ip
+  #   user = "ubuntu"
+  #   private_key = "${DEV_ACCESS_KEY}"
+  # }
+  # provisioner "file" {
+  #   source = "projfiles"
+  #   destination = "/home/ubuntu"
+  # }
   # provisioner "remote-exec" {
   #   inline = [
   #     "docker stop nodejs-demo",
