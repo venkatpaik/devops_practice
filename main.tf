@@ -128,7 +128,7 @@ output "server_public_ip" {
   value = aws_eip.one.public_ip
 }
 
-variable "credentials_file" {
+variable "credential_file" {
   default = TF_VAR_key
 }
 
@@ -166,7 +166,7 @@ resource "aws_instance" "web-server-instance" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = "${var.credentials_file}"
+    private_key = "${var.credential_file}"
   }
   provisioner "file" {
     source = "projfiles"
