@@ -129,7 +129,7 @@ output "server_public_ip" {
 }
 
 variable "credentials_file" {
-  default = TF_VAR_key
+
 }
 
 # # 9. Create ubuntu instance and install/enable docker
@@ -166,7 +166,7 @@ resource "aws_instance" "web-server-instance" {
   connection {
     type = "ssh"
     user = "ubuntu"
-    private_key = "${var.credentials_file}"
+    private_key = var.credentials_file
   }
   provisioner "file" {
     source = "projfiles"

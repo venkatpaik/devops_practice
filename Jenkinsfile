@@ -7,7 +7,7 @@ pipeline{
     environment {
         AWS_ACCESS_KEY = credentials('AWS_ACCESS_KEY')
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
-        TF_VAR_key = credentials('DEV_ACCESS_KEY')
+        DEV_ACCESS_KEY = credentials('DEV_ACCESS_KEY')
     }
     
     stages{
@@ -28,6 +28,7 @@ pipeline{
         }
         stage("terraform apply"){
             steps{
+                sh 'export TF_VAR_credentials_file = ${DEV_ACCESS_KEY}'
                 sh label: 'tapply', script: 'terraform apply --auto-approve'
             }
         }
