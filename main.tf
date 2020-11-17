@@ -131,7 +131,7 @@ output "server_public_ip" {
 # # 9. Create ubuntu instance and install/enable docker
 
 resource "aws_instance" "web-server-instance" {
-  ami               = "ami-0db0b3ab7df22e366"
+  ami               = "ami-0a4a70bd98c6d6441"
   instance_type     = "t2.micro"
   availability_zone = "ap-south-1a"
   key_name          = "my_access"
@@ -145,8 +145,7 @@ resource "aws_instance" "web-server-instance" {
               #!/bin/bash
               sudo apt update
               sudo apt install docker.io
-              sudo systemctl start docker
-              sudo systemctl enable docker
+              sudo systemctl enable --now docker
               EOF
 
   # provisioner "remote-exec" {
