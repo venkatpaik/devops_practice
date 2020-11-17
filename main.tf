@@ -141,31 +141,28 @@ resource "aws_instance" "web-server-instance" {
     network_interface_id = aws_network_interface.web-server-nic.id
   }
 
-  user_data = <<-EOF
-              #!/bin/bash
-              cd ~
-              sudo apt update
-              sudo apt -y install docker.io
-              sudo systemctl enable --now docker
-              EOF
+  # user_data = <<-EOF
+  #             #!/bin/bash
+  #             cd ~
+  #             sudo apt update
+  #             sudo apt -y install docker.io
+  #             sudo systemctl enable --now docker
+  #             EOF
 
   # provisioner "remote-exec" {
   #   inline = [
-  #     "sudo apt-get update",
-  #     "sudo apt-get install apt-transport-https ca-certificates curl gnupg-agent software-properties-common",
-  #     "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
-  #     "sudo add-apt-repository deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable",
-  #     "sudo apt-get update",
-  #     "sudo apt-get install docker-ce docker-ce-cli containerd.io",
-  #     "mkdir /home/ubuntu/devops"
-  #   #   "sudo groupadd docker",
-  #   #   "sudo usermod -aG docker $USER"
+  #     "cd ~",
+  #     "sudo apt update",
+  #     "sudo apt -y install docker.io",
+  #     "sudo systemctl enable --now docker",
+  #     "sudo groupadd docker",
+  #     "sudo usermod -aG docker $USER"
   #   ]
   # } 
-  # provisioner "file" {
-  #   source = "projfiles"
-  #   destination = "/home/ubuntu/devops"
-  # }
+  provisioner "file" {
+    source = "projfiles"
+    destination = "/home/ubuntu"
+  }
   # provisioner "remote-exec" {
   #   inline = [
   #     "docker stop nodejs-demo",
