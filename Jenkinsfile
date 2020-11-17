@@ -20,14 +20,14 @@ pipeline{
                 sh label: 'tinit', script: 'terraform init'
             }
         }
-        stage("terraform destroy"){
-            steps{
-                sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
-            }
-        }
         stage("terraform apply"){
             steps{
                 sh label: 'tapply', script: 'terraform apply --auto-approve'
+            }
+        }
+        stage("terraform destroy"){
+            steps{
+                sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
             }
         }
     }
