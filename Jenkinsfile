@@ -9,6 +9,10 @@ pipeline{
         AWS_SECRET_KEY = credentials('AWS_SECRET_KEY')
         DEV_ACCESS_KEY = credentials('DEV_ACCESS_KEY')
     }
+
+    // parameters {
+    //     string(name : )
+    // }
     
     stages{
         stage("git checkout"){
@@ -26,11 +30,11 @@ pipeline{
                 sh label: 'tdestroy', script: 'terraform destroy --auto-approve'
             }
         }
-        stage("terraform apply"){
-            steps{
-                sh 'echo ${DEV_ACCESS_KEY}'
-                sh label: 'tapply', script: 'terraform apply --auto-approve'
-            }
-        }
+        // stage("terraform apply"){
+        //     steps{
+        //         sh 'echo ${DEV_ACCESS_KEY}'
+        //         sh label: 'tapply', script: 'terraform apply --auto-approve'
+        //     }
+        // }
     }
 }
