@@ -143,9 +143,10 @@ resource "aws_instance" "web-server-instance" {
 
   user_data = <<-EOF
               #!/bin/bash
-              sudo apt update > a.txt
-              sudo apt install docker.io > b.txt
-              sudo systemctl enable --now docker > c.txt
+              cd ~
+              sudo apt update
+              sudo apt -y install docker.io
+              sudo systemctl enable --now docker
               EOF
 
   # provisioner "remote-exec" {
